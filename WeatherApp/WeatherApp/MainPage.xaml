@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="WeatherApp.MainPage" BackgroundColor="#E4E4E4" >
+
+    <Grid Padding="0" RowSpacing="10" >
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="3*"/>
+
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="4*"/>
+            
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="70"/>
+
+
+        </Grid.RowDefinitions>
+
+        <StackLayout Grid.Row="0" Padding="15,0" Orientation="Horizontal" BackgroundColor="#FCFCFC">
+            <Entry x:Name="txtCity" Completed="txtCity_Completed" Keyboard="Plain" TextColor="#010B2D" FontSize="Large" Placeholder="City..." Margin="5,5,0,0" HorizontalOptions="FillAndExpand" />
+            <Image Source="search.png" Margin="0,0,10,0"  WidthRequest="50">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="searchClick"/>
+                </Image.GestureRecognizers>
+            </Image>
+        </StackLayout>
+        <Grid x:Name="grid1" Grid.Row="1" Margin="15,0">
+            <BoxView  BackgroundColor="#4A6DC0" CornerRadius="20" />
+            <Label x:Name="txtClock" TextColor="White" FontSize="35" VerticalOptions="Center" HorizontalOptions="Center"/>
+        </Grid>
+        <Grid x:Name="grid2" Grid.Row="2" Margin="15,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="7*"/>
+
+            </Grid.ColumnDefinitions>
+            <BoxView Grid.ColumnSpan="2" BackgroundColor="#4A6DC0" CornerRadius="20" />
+            <Image Grid.Column="0" Source="{Binding weather[0].icon,StringFormat='http://openweathermap.org/img/wn/{0}@2x.png'}" Aspect="AspectFit" HeightRequest="120" WidthRequest="120" VerticalOptions="Center" HorizontalOptions="Center"/>
+            <StackLayout Grid.Column="1" VerticalOptions="Center" Spacing="0">
+                <Label Text="{Binding sys.country}" TextColor="White" HorizontalOptions="Center" FontSize="16" />
+
+                <Label Text="{Binding name}" TextColor="White" HorizontalOptions="Center" FontSize="26" />
+                <Label Text="{Binding weather[0].description}" TextColor="White" HorizontalOptions="Center" FontSize="18"/>
+
+            </StackLayout>
+        </Grid>
+        <Grid x:Name="grid3" Grid.Row="3" Margin="15,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2"/>
+
+                <ColumnDefinition Width="*"/>
+
+            </Grid.ColumnDefinitions>
+            <BoxView Grid.ColumnSpan="3" BackgroundColor="#5F8BF6" CornerRadius="20" />
+            <BoxView Grid.Column="1" BackgroundColor="#D7D6D4" Margin="0,10"/>
+            <StackLayout Grid.Column="2" Margin="10">
+                <Image  Source="temperature.png" Aspect="AspectFit" HeightRequest="40" WidthRequest="40" VerticalOptions="Center" HorizontalOptions="Center"/>
+                <Label Text="{Binding main.temp,StringFormat='{0}&#176;'}" TextColor="White" HorizontalOptions="Center" FontSize="18"/>
+
+            </StackLayout>
+            <StackLayout Grid.Column="0" Margin="10">
+                <Image  Source="humidity.png" Aspect="AspectFit" HeightRequest="40" WidthRequest="40" VerticalOptions="Center" HorizontalOptions="Center"/>
+                <Label Text="{Binding main.humidity,StringFormat='{0}%'}" TextColor="White" HorizontalOptions="Center" FontSize="18"/>
+
+            </StackLayout>
+        </Grid>
+        <Grid x:Name="grid4" Grid.Row="4" Margin="15,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2"/>
+
+                <ColumnDefinition Width="*"/>
+
+            </Grid.ColumnDefinitions>
+            <BoxView Grid.ColumnSpan="3" BackgroundColor="#5F8BF6" CornerRadius="20" />
+            <BoxView Grid.Column="1" BackgroundColor="#D7D6D4" Margin="0,10"/>
+            <StackLayout Grid.Column="2" Margin="10" Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="Center">
+
+                <Image  Source="up.png" Aspect="AspectFit" HeightRequest="40" WidthRequest="40" VerticalOptions="Center" HorizontalOptions="Center" />
+                <Label Text="{Binding main.temp_max,StringFormat='{0}&#176;'}" TextColor="White" HorizontalOptions="Center" FontSize="18" VerticalOptions="Center"/>
+
+            </StackLayout>
+            <StackLayout Grid.Column="0" Margin="10" Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="Center">
+
+                <Image  Source="down.png" Aspect="AspectFit" HeightRequest="40" WidthRequest="40" VerticalOptions="Center" HorizontalOptions="Center"/>
+                <Label Text="{Binding main.temp_min,StringFormat='{0}&#176;'}" TextColor="White" HorizontalOptions="Center" FontSize="18" VerticalOptions="Center"/>
+
+            </StackLayout>
+        </Grid>
+        <Grid x:Name="grid5" Grid.Row="5" Margin="15,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2"/>
+
+                <ColumnDefinition Width="*"/>
+
+            </Grid.ColumnDefinitions>
+            <BoxView Grid.ColumnSpan="3" BackgroundColor="#5F8BF6" CornerRadius="20" />
+            <BoxView Grid.Column="1" BackgroundColor="#D7D6D4" Margin="0,10"/>
+            <StackLayout Grid.Column="2" Margin="10">
+                <Image  Source="sunrise.png" Aspect="AspectFit" HeightRequest="30" WidthRequest="30" VerticalOptions="Center" HorizontalOptions="Center"/>
+                <Label x:Name="txtSunrise" Text="" TextColor="White" HorizontalOptions="Center" FontSize="18"/>
+
+            </StackLayout>
+            <StackLayout Grid.Column="0" Margin="10">
+                <Image  Source="sunset.png" Aspect="AspectFit" HeightRequest="30" WidthRequest="30" VerticalOptions="Center" HorizontalOptions="Center"/>
+                <Label x:Name="txtSunset" Text="" TextColor="White" HorizontalOptions="Center" FontSize="18"/>
+
+            </StackLayout>
+        </Grid>
+
+        <Button x:Name="btnMap" Clicked="btnMap_Clicked"  Grid.Row="6"  ImageSource="marker.png" Text="Browse with map" TextColor="White" FontSize="24"  BackgroundColor="#222255"/>
+
+        <ActivityIndicator x:Name="loading" Grid.Row="1"  Color="DarkBlue" IsRunning="True" WidthRequest="50" HeightRequest="50" />
+
+    </Grid>
+    
+
+</ContentPage>
